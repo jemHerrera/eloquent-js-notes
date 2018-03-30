@@ -37,6 +37,10 @@ INDICATE THAT A PATTERN SHOULD OCCUR A PRECISE NUMBER OF TIMES
 GROUPING SUBEXPRESSIONS (use * or + on more than one element at a time)
 	/boo+(hoo)+/
 
+
+
+gffghghgh
+
 .EXECUTE METHOD (returns null of no match was found, and returns an object with information about the match otherwise)
 	match = /\d+/.exec("one two 100")) 
 	console.log(match) // ["100"]
