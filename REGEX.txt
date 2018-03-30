@@ -1,0 +1,55 @@
+REGULAR EXPRESSIONS
+
+.TEST
+	/abc/.test("abcde") // true
+	/abc/.test("abxde")  // false
+
+SETS (match any of the characters)
+	/[0123456789]/.test("in 1992") //true
+	/[0-9]/.test("in 1992") // true
+
+SHORTCUTS
+	\d	Any digit character
+	\w	An alphanumeric character (“word character”)
+	\s	Any whitespace character (space, tab, newline, and similar)
+	\D	A character that is not a digit
+	\W	A nonalphanumeric character
+	\S	A nonwhitespace character
+	.	Any character except for newline
+
+INVERT SET OF CHRACTERS (match any character except the ones in the set)
+	/[^01]/. test("0010101010101") // true
+	/[^01]/. test("00101010210101") // false
+
+REPEATING PARTS OF THE PATTERN
+	/'\d+'/.test("'123'") // true
+	/'\d*'/.test("'123'") // true
+	/'\d*'/.test("''") // true  <- * allows pattern to match zero times
+
+OPTIONAL CHARACTER
+	//colou?r.test(color) // true
+
+INDICATE THAT A PATTERN SHOULD OCCUR A PRECISE NUMBER OF TIMES
+	{4}	occur exactly four times
+	{2,4}	occur atleast twice and atmost 4 times
+	{5,}	occur 5 or more times
+
+GROUPING SUBEXPRESSIONS (use * or + on more than one element at a time)
+	/boo+(hoo)+/
+
+.EXECUTE METHOD (returns null of no match was found, and returns an object with information about the match otherwise)
+	match = /\d+/.exec("one two 100")) 
+	console.log(match) // ["100"]
+	console.log(match.index) // 8  <- index property tells us where in the string the successful match begins
+	
+
+.MATCH METHOD(works the same way as .execute but used on strings instead)
+	console.log("one two 100").match(/\d+/)); //["100"]
+	
+DATE AND TIME
+	console.log(new Date()) // Fri Mar 30 2018 14:46:30 GMT-0600 (Mountain Daylight Time)
+	console.log(new Date(2009, 11, 9)) // ? Wed Dec 09 2009 00:00:00 GMT+0100 (CET)
+	console.log(new Date().getTime()) // 1387407600000 <- number of milliseconds since 1970, "UNIX" time standard
+
+DATE OBJECT METHODS
+	getFullYear, getMonth, getDate, getHours, getMinutes, getSeconds, getYear
