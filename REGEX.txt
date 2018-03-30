@@ -54,3 +54,6 @@ DATE AND TIME
 
 DATE OBJECT METHODS
 	getFullYear, getMonth, getDate, getHours, getMinutes, getSeconds, getYear
+
+
+laptop test
