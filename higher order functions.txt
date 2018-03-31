@@ -1,0 +1,57 @@
+Chapter 5 - Higher Order Functions
+
+---HIGHER ORDER FUNCTIONS---
+
+1. EXAMPLE
+
+function repeat(n, action){
+  for(let i=0; i<n; i++){
+    action(i);
+  }
+}
+
+2. FUNCTIONS THAT CREATE NEW FUNCTIONS
+
+function greaterThan(n){
+  return function(m){
+    return m>n;
+  }
+}
+let  greaterThan10 = greaterThan(10);
+console.log(greaterThan10(11));
+// true
+
+3. FUNCTIONS THAT CHANGE OTHER FUNCTIONS
+
+function noisy(f){
+  return funciton(...args){
+    let result = f(...args);
+    return result;
+  };
+};
+noisy(Math.min)(3, 2, 1);
+// 1
+
+4.FUNCTION THAT PROVIDE NEW TYPE OF CONTROL FLOW
+function unless(test, then){
+  if(!test) then();
+}
+
+-----BUILT IN ARRAY METHODS-----
+1. forEach
+["A","B"].forEach(function(l){
+  return console.log(l)
+});
+// A
+// B
+
+2. filter
+let ToptoBottomScripts = SCRIPTS.filter(s => s.direction == "ttb");
+
+3. map
+let arrayOfScriptNames = ToptoBottomScipts.map(s => s.name);
+
+4.reduce
+let sumOfElements = [1,2,3,4].reduce((a,b) => a+b, 0);
+
+
