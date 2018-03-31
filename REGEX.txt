@@ -17,33 +17,32 @@ SHORTCUTS
 	\S	A nonwhitespace character
 	.	Any character except for newline
 
-INVERT SET OF CHRACTERS (match any character except the ones in the set)
-	/[^01]/. test("0010101010101") // true
-	/[^01]/. test("00101010210101") // false
+INVERTED SET (^) (match any character except the ones in the set)
+	/[^01]/. test("0010101010101") // false
+	/[^01]/. test("00101010210101") // true
 
-REPEATING PARTS OF THE PATTERN
+REPETITION OPERATORS (+ *)
 	/'\d+'/.test("'123'") // true
 	/'\d*'/.test("'123'") // true
 	/'\d*'/.test("''") // true  <- * allows pattern to match zero times
 
-OPTIONAL CHARACTER
+OPTIONAL CHARACTER (?)
 	//colou?r.test(color) // true
 
-INDICATE THAT A PATTERN SHOULD OCCUR A PRECISE NUMBER OF TIMES
+PRECISE REPETITION ({1})
 	{4}	occur exactly four times
 	{2,4}	occur atleast twice and atmost 4 times
 	{5,}	occur 5 or more times
 
-GROUPING SUBEXPRESSIONS (use * or + on more than one element at a time)
-	/boo+(hoo)+/
+GROUPING SUBEXPRESSIONS (use () to use * or + on more than one element at a time)
+	/boo+(hoo+)+/
 
 
-.EXECUTE METHOD (returns null of no match was found, and returns an object with information about the match otherwise)
+.EXECUTE METHOD (returns an object instead of binary)
 	match = /\d+/.exec("one two 100")) 
 	console.log(match) // ["100"]
 	console.log(match.index) // 8  <- index property tells us where in the string the successful match begins
 	
-
 .MATCH METHOD(works the same way as .execute but used on strings instead)
 	console.log("one two 100").match(/\d+/)); //["100"]
 	
@@ -55,14 +54,37 @@ DATE CLASS
 DATE OBJECT METHODS
 	getFullYear, getMonth, getDate, getHours, getMinutes, getSeconds, getYear
 
-WORD AND STRING BOUNDARIES
+WORD AND STRING BOUNDARIES (^ $)
 	/^/ matches the start of the input string
 	/$/ matches the end of the input string
 	/\b/ word boundary, example 	/\bcat\b/.test("concatenate") // false
 				  	/\bcar\b/.text("con cat tenate")  //true
-CHOICE PATTERNS
+CHOICE PATTERNS (|)
 	let animalCount = /\b\d+ (pig|cow|chickens)s?\b/;
 	console.log(animalCount.test("15 pigs")); //true
 
+.REPLACE METHOD (replace part of the string with another string)
+	"Borobudur".replace(/[ou]/, "a") // Barobudur -> only replaces the first match
+	"Borobudur".replace(/[ou]/g, "a") // Barabadar -> the g stands for global, meaning replace all matches
 
+SWITCHING GROUPS USING .REPLACE ($1 - $9, $&)
+	console.log("Liskov, Barbara\nMcCarthy, John\nWadler, Philip".replace(/(\w+), (\w+)/g, "$2 $1"));
+	// ? Barbara Liskov
+	//   John McCarthy
+	//   Philip Wadler
 
+FUNCTION ARGUMENT ON .REPLACE (function(match, group1, group2...))
+	let stock = "1 lemon, 2 cabbages, and 101 eggs";
+	function minusOne(match, amount, unit) {
+ 	 amount = Number(amount) - 1;
+ 	 if (amount == 1) { // only one left, remove the 's'
+   	 unit = unit.slice(0, unit.length - 1);
+ 	 } else if (amount == 0) {
+  	  amount = "no";
+	  }
+	  return amount + " " + unit;
+	}
+	console.log(stock.replace(/(\d+) (\w+)/g, minusOne));
+	// ? no lemon, 1 cabbage, and 100 eggs
+	
+	
