@@ -47,7 +47,7 @@ GROUPING SUBEXPRESSIONS (use * or + on more than one element at a time)
 .MATCH METHOD(works the same way as .execute but used on strings instead)
 	console.log("one two 100").match(/\d+/)); //["100"]
 	
-DATE AND TIME
+DATE CLASS
 	console.log(new Date()) // Fri Mar 30 2018 14:46:30 GMT-0600 (Mountain Daylight Time)
 	console.log(new Date(2009, 11, 9)) // ? Wed Dec 09 2009 00:00:00 GMT+0100 (CET)
 	console.log(new Date().getTime()) // 1387407600000 <- number of milliseconds since 1970, "UNIX" time standard
@@ -55,5 +55,14 @@ DATE AND TIME
 DATE OBJECT METHODS
 	getFullYear, getMonth, getDate, getHours, getMinutes, getSeconds, getYear
 
+WORD AND STRING BOUNDARIES
+	/^/ matches the start of the input string
+	/$/ matches the end of the input string
+	/\b/ word boundary, example 	/\bcat\b/.test("concatenate") // false
+				  	/\bcar\b/.text("con cat tenate")  //true
+CHOICE PATTERNS
+	let animalCount = /\b\d+ (pig|cow|chickens)s?\b/;
+	console.log(animalCount.test("15 pigs")); //true
 
-laptop test
+
+
